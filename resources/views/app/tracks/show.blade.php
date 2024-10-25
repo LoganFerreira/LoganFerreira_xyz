@@ -14,6 +14,11 @@
                 <dt>Titre</dt>
                 <dd>{{ $track->title }}</dd>
 
+                <dt>Catégorie</dt>
+                <dd>
+                    <a href="{{ route('app.categories.show', ['category' => $track->category->id]) }}" class="link">{{ $track->category->name }}</a>
+                </dd>
+
                 <dt>Contributeur</dt>
                 <dd class="flex-center">
                     <x-avatar size="medium" :src="$track->user->avatar" /> {{ $track->user->username }}
@@ -56,9 +61,9 @@
                     <form action="{{ route('app.tracks.like', ['week' => $week->uri, 'track' => $track]) }}" method="post">
                         @csrf
                         @if ($liked)
-                        <button class="secondary w-full">Je n'aime pas ce titre</button>
+                            <button class="secondary w-full">Je n'aime pas ce titre</button>
                         @else
-                        <button class="primary w-full">J'aime ce titre</button>
+                            <button class="primary w-full">J'aime ce titre</button>
                         @endif
                     </form>
                 </div>
