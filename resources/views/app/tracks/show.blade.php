@@ -16,7 +16,11 @@
 
                 <dt>Catégorie</dt>
                 <dd>
-                    <a href="{{ route('app.categories.show', ['category' => $track->category->id]) }}" class="link">{{ $track->category->name }}</a>
+                    @if ($track->category)
+                        <a href="{{ route('app.categories.show', ['category' => $track->category->id]) }}" class="link">{{ $track->category->name }}</a>
+                    @else
+                        <span>No Category</span>
+                    @endif
                 </dd>
 
                 <dt>Contributeur</dt>

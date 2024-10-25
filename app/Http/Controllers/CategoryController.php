@@ -18,7 +18,8 @@ class CategoryController
      */
     public function show(Category $category)
     {
-        return view('components.show', compact('category'));
+        $tracks = $category->tracks()->paginate(10); // Ajustez la pagination si nécessaire
+        return view('components.show', compact('category', 'tracks'));
     }
 
 }
