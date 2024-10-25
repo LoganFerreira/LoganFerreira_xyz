@@ -21,6 +21,7 @@ class Track extends Model
         'title',
         'artist',
         'url',
+        'category_id', // Ensure category_id is fillable
     ];
 
     /**
@@ -29,7 +30,7 @@ class Track extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class)
-                    ->withDefault();
+            ->withDefault();
     }
 
     /**
@@ -38,15 +39,23 @@ class Track extends Model
     public function likes(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'likes')
-                    ->withPivot('liked_at');
+            ->withPivot('liked_at');
     }
 
     /**
-     * Get the track likes.
+     * Get the week this track belongs to.
      */
     public function week(): BelongsTo
     {
         return $this->belongsTo(Week::class);
+    }
+
+    /**
+     * Get the category this track belongs to.
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 
     /**

@@ -35,26 +35,12 @@
                     <p class="error-message">{{ $message }}</p>
                     @enderror
 
-                    @php
-                        $categories = [
-                            'Soul',
-                            'Ambient',
-                            'Pop',
-                            'Rap',
-                            'Funk',
-                            'Rock',
-                            'Reggae / Dub',
-                            'Techno',
-                            'Electro'
-                        ];
-                    @endphp
-
                     <div>
                         <label for="category_id">Catégorie</label>
                         <select name="category_id" id="category_id">
                             <option value="" selected disabled>Sélectionner une catégorie</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category }}">{{ $category }}</option>
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>

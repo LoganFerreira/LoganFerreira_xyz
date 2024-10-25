@@ -36,7 +36,7 @@ class TrackController extends Controller
      */
     public function create(UserService $user): View
     {
-        $categories = Category::all();
+        $categories = \App\Models\Category::all();
         return view('app.tracks.create', [
             'week' => Week::current(),
             'remaining_tracks_count' => $user->remainingTracksCount(),
@@ -55,12 +55,12 @@ class TrackController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'artist' => ['required', 'string', 'max:255'],
             'url' => ['required', 'url', new PlayerUrl()],
-            'category_id' => ['required', 'exists:categories,id'],
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         DB::beginTransaction();
 
-        // Set track title, artist and url
+        // Set track title, artist, url, and category_id
         $track = new Track($validated);
 
         // Set track's user + week
@@ -71,7 +71,7 @@ class TrackController extends Controller
             // Fetch track detail from provider (YT, SC)
             $details = $player->details($track->url);
 
-            // Set player_id, track_id and thumbnail_url
+            // Set player_id, track_id, and thumbnail_url
             $track->player = $details->player_id;
             $track->player_track_id = $details->track_id;
             $track->player_thumbnail_url = $details->thumbnail_url;
