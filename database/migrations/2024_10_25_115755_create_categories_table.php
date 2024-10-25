@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateCategoriesTable extends Migration
 {
@@ -18,6 +19,19 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        // Insert default categories
+        DB::table('categories')->insert([
+            ['name' => 'Soul'],
+            ['name' => 'Ambient'],
+            ['name' => 'Pop'],
+            ['name' => 'Rap'],
+            ['name' => 'Funk'],
+            ['name' => 'Rock'],
+            ['name' => 'Reggae / Dub'],
+            ['name' => 'Techno'],
+            ['name' => 'Electro'],
+        ]);
     }
 
     /**
